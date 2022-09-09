@@ -22,6 +22,20 @@ public class ContaCorrente {
 		
 	}
 	
+	public boolean sacar(float v, float saldo) {
+		
+		Scanner entrada = new Scanner(System.in);
+		System.out.print("Valor do saque: ");
+        v = entrada.nextInt();
+		
+		if (saldo - v < 00.f) {
+			return False;
+		}else {
+			Transacao t = new Transacao("saque", v, saldo);
+			
+		}
+		
+	}
 
 	
 	public void Depositar() {
