@@ -6,42 +6,66 @@ public class ContaCorrente {
 	private float saldo;
 	private int numeroConta;
 	private int numeroAgencia;
-	private float v;
+	float v;
+	float valor;
 	
 	private ArrayList<String> transacoes = new ArrayList<String>();
 	
-	
-	public ContaCorrente(int numeroConta, int numeroAgencia){
-			
-		this.saldo = 0.0f;
-		this.numeroAgencia = numeroAgencia;
+	public ContaCorrente(int numeroConta, int numeroAgencia) {
+		
+		saldo = 0.0f;
 		this.numeroConta = numeroConta;
-		
-		Cliente cliente = new Cliente();
-		Transaçao transacao = new Transaçao();
-		
-	}
-	
-	public boolean sacar(float v, float saldo) {
-		
-		Scanner entrada = new Scanner(System.in);
-		System.out.print("Valor do saque: ");
-        v = entrada.nextInt();
-		
-		if (saldo - v < 00.f) {
-			return False;
-		}else {
-			Transacao t = new Transacao("saque", v, saldo);
-			
-		}
-		
+		this.numeroAgencia = numeroAgencia;
+
 	}
 
-	
-	public void Depositar() {
+	public float Depositar(float v) {
 		
 		Scanner entrada = new Scanner(System.in);
 		System.out.print("Valor do depósito: ");
-        v = entrada.nextInt();
+		v = entrada.nextInt();
+		
+		saldo = saldo + v;
+		
+		Transacao t = new Transacao(saldo, "deposito", v);
+		RegistrarTransacao(t);
+		
+		return saldo;
 	}
+	
+	public boolean Sacar(float valor) {
+		Scanner entrada = new Scanner(System.in);
+		System.out.print("Valor para saque: ");
+		valor = entrada.nextInt();
+		
+		if(valor<saldo) {
+			saldo = saldo - valor;
+			Transacao t = new Transacao(saldo, "saque", v);
+			RegistrarTransacao(t);
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+	
+	public float getSaldo() {
+		return saldo;
+	}
+	public void setSaldo(float saldo) {
+		this.saldo = saldo;
+	}
+	public int getNumeroConta() {
+		return numeroConta;
+	}
+	public void setNumeroConta(int numeroConta) {
+		this.numeroConta = numeroConta;
+	}
+	public int getNumeroAgencia() {
+		return numeroAgencia;
+	}
+	public void setNumeroAgencia(int numeroAgencia) {
+		this.numeroAgencia = numeroAgencia;
+	}
+	 
 }
