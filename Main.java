@@ -1,30 +1,43 @@
 package ContasBancarias;
 
 import java.util.Scanner;
+import java.util.Date;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Cliente cliente = new Cliente();
-		Transacao transacao = new Transacao();
-		ContaCorrente conta = new ContaCorrente(int numeroConta, int numeroAgencia);
-		float v;
 		
-		int op;
-		Scanner entrada = new Scanner(System.in);
+		ContaCorrente conta = new ContaCorrente();
+		conta.Depositar(340.90f);
+		conta.setNumeroConta(22367);
+		conta.setNumeroAgencia(9987);
 		
-		do {
-			System.out.println("1.Depositar");
-			System.out.println("2.Sacar");
-			System.out.println("3.Obter extrato");
-			System.out.println("4.Sair");
-			op = entrada.nextInt();
+		Transacao transacaoA = new Transacao();
+		transacaoA.setOperacao("Deposito");
+		transacaoA.setV(200.00f);
+		transacaoA.setDataHora(new Date());
+		transacaoA.setNovoSaldo(conta.getSaldo());
+		
+		conta.registrarTransacao(transacaoA);
+		
+		if(conta.Sacar(200.00f)) {
 			
-		}while(op!=4);
-		
-		if(op == 1) {
-			conta.Depositar(v);
+			Transacao transacaoB = new Transacao();
+			transacaoB.setOperacao("Saque");
+			transacaoB.setV(200.00f);
+			transacaoB.setDataHora(new Date());
+			transacaoB.setNovoSaldo(conta.getSaldo());
+			
+			conta.registrarTransacao(transacaoB);
+		} else {
+			
+			System.out.println("Saldo insuficiente!");
 		}
+		
+		System.out.println("Conta:" + conta.getNumeroConta());
+		System.out.println("Agencia:" + conta.getNumeroAgencia());
+		
+		
 	}
 }

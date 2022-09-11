@@ -1,51 +1,52 @@
 package ContasBancarias;
 import java.util.*;
+import ContasBancarias.Main;
 
 public class ContaCorrente {
 
 	private float saldo;
 	private int numeroConta;
 	private int numeroAgencia;
-	float v;
-	float valor;
 	
-	private ArrayList<String> transacoes = new ArrayList<String>();
+	private ArrayList<Transacao> transacoes;
+	
+	public ContaCorrente() {
+		
+	}
 	
 	public ContaCorrente(int numeroConta, int numeroAgencia) {
 		
-		saldo = 0.0f;
-		this.numeroConta = numeroConta;
-		this.numeroAgencia = numeroAgencia;
+		this.saldo = 0.0f;
+		this.transacoes = new ArrayList<Transacao>();
 
 	}
 
 	public float Depositar(float v) {
 		
-		Scanner entrada = new Scanner(System.in);
-		System.out.print("Valor do depósito: ");
-		v = entrada.nextInt();
 		
-		saldo = saldo + v;
 		
-		Transacao t = new Transacao(saldo, "deposito", v);
-		RegistrarTransacao(t);
+		this.saldo = saldo + v;
+	
 		
-		return saldo;
+		return this.saldo;
 	}
 	
-	public boolean Sacar(float valor) {
-		Scanner entrada = new Scanner(System.in);
-		System.out.print("Valor para saque: ");
-		valor = entrada.nextInt();
+	public boolean Sacar(float v) {
 		
-		if(valor<saldo) {
-			saldo = saldo - valor;
-			Transacao t = new Transacao(saldo, "saque", v);
-			RegistrarTransacao(t);
+		
+		if(v<this.saldo) {
+			this.saldo = this.saldo - v;
+		
+			
 			return true;
 		} else {
 			return false;
 		}
+		
+	}
+	
+	public void registrarTransacao(Transacao e) {
+		this.transacoes.add(e);
 		
 	}
 	
