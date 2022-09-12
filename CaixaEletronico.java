@@ -13,36 +13,57 @@ public class CaixaEletronico {
 		cliente1.setEndereco("Rua 02, bairro Flores");
 		
 		
-		ContaCorrente conta = new ContaCorrente();
-		conta.Depositar(340.90f);
-		conta.setNumeroConta(22367);
-		conta.setNumeroAgencia(9987);
+		ContaCorrente conta = new ContaCorrente(22459, 5678);
 		
-		Transacao transacaoA = new Transacao();
-		transacaoA.setOperacao("Deposito");
-		transacaoA.setV(200.00f);
-		transacaoA.setDataHora(new Date());
-		transacaoA.setNovoSaldo(conta.getSaldo());
-		
-		conta.registrarTransacao(transacaoA);
-		
-		if(conta.Sacar(200.00f)) {
-			
-			Transacao transacaoB = new Transacao();
-			transacaoB.setOperacao("Saque");
-			transacaoB.setV(200.00f);
-			transacaoB.setDataHora(new Date());
-			transacaoB.setNovoSaldo(conta.getSaldo());
-			
-			conta.registrarTransacao(transacaoB);
-		} else {
-			
-			System.out.println("Saldo insuficiente!");
-		}
-		
+		System.out.println();
+		System.out.println("Nome:" + cliente1.getNome());
+		System.out.println("RG:"+ cliente1.getRg());
+		System.out.println("Endereço:"+ cliente1.getEndereco());
 		System.out.println("Conta:" + conta.getNumeroConta());
 		System.out.println("Agencia:" + conta.getNumeroAgencia());
-		System.out.println("Saldo:" + conta.getSaldo());
+		
+		
+		conta.Depositar(340.90f);
+		conta.Depositar(112.10f);
+		
+		
+		conta.Sacar(200.00f);
+		conta.Depositar(100.00f);
+		conta.Depositar(112.00f);
+		
+		System.out.println();
+		conta.ObterExtrato();
+		
+		
+		Cliente cliente2 = new Cliente();
+		cliente2.setNome("Maria Nascimento Cavalcante");
+		cliente2.setRg("78452-6");
+		cliente2.setEndereco("Bairro da União");
+		
+		
+		ContaCorrente conta2 = new ContaCorrente(96578, 2279);
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("Nome:" + cliente2.getNome());
+		System.out.println("RG:"+ cliente2.getRg());
+		System.out.println("Endereço:"+ cliente2.getEndereco());
+		System.out.println("Conta:" + conta2.getNumeroConta());
+		System.out.println("Agencia:" + conta2.getNumeroAgencia());
+		
+		conta2.Depositar(300.00f);
+		conta2.Depositar(50.00f);
+		
+		
+		conta2.Sacar(500.00f);
+			
+		System.out.println();
+		conta2.ObterExtrato();;
+		
 		
 	}
+
+	
 }
+
+

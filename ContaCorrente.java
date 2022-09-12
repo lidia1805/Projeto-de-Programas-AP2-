@@ -10,9 +10,6 @@ public class ContaCorrente {
 	
 	private ArrayList<Transacao> transacoes;
 	
-	public ContaCorrente() {
-		
-	}
 	
 	public ContaCorrente(int numeroConta, int numeroAgencia) {
 		
@@ -23,20 +20,48 @@ public class ContaCorrente {
 
 	}
 
-	public float Depositar(float v) {
+	public float Depositar( float v) {
+		Transacao transacaoA = new Transacao();
+		transacaoA.setOperacao("Deposito");
+		transacaoA.setV(v);
+		transacaoA.setDataHora(new Date());
+		transacaoA.setNovoSaldo(this.getSaldo());
+		
+		this.registrarTransacao(transacaoA);
+		
 		this.saldo = saldo + v;
 		return this.saldo;
 	}
 	
-	public boolean Sacar(float v) {
+	public void Sacar(float v) {
+		
+		
 		if(v<this.saldo) {
 			this.saldo = this.saldo - v;
-	
-			return true;
+			Transacao transacao3 = new Transacao();
+			transacao3.setOperacao("Saque");
+			transacao3.setV(v);
+			transacao3.setDataHora(new Date());
+			transacao3.setNovoSaldo(this.getSaldo());
+			
+			this.registrarTransacao(transacao3);
+
 		} else {
-			return false;
+			System.out.println();
+			System.out.println("Valor requerido para saque: "+ v);
+			System.out.println("Saldo insuficiente para saque!");
 		}
 		
+	}
+	
+	public void ObterExtrato() {
+		
+		System.out.println("---------------------EXTRATO---------------------");
+		for(int i =0; i< this.getExtrato().size(); i++) {
+			System.out.println(this.getExtrato().get(i).getDataHora()+" - " + this.getExtrato().get(i).getOperacao()+ " - " +
+			(String.format("%.02f", this.getExtrato().get(i).getV())));
+		}
+		System.out.println("Saldo:" + this.getSaldo());
 	}
 	
 	public void registrarTransacao(Transacao e) {
@@ -44,6 +69,10 @@ public class ContaCorrente {
 		
 	}
 	
+	
+	public ArrayList<Transacao> getExtrato() {
+		return transacoes;
+	}
 	public float getSaldo() {
 		return saldo;
 	}
