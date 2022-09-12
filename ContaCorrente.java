@@ -1,6 +1,6 @@
 package ContasBancarias;
 import java.util.*;
-import ContasBancarias.Main;
+import ContasBancarias.CaixaEletronico;
 
 public class ContaCorrente {
 
@@ -17,27 +17,21 @@ public class ContaCorrente {
 	public ContaCorrente(int numeroConta, int numeroAgencia) {
 		
 		this.saldo = 0.0f;
+		this.numeroAgencia = numeroAgencia;
+		this.numeroConta = numeroConta;
 		this.transacoes = new ArrayList<Transacao>();
 
 	}
 
 	public float Depositar(float v) {
-		
-		
-		
 		this.saldo = saldo + v;
-	
-		
 		return this.saldo;
 	}
 	
 	public boolean Sacar(float v) {
-		
-		
 		if(v<this.saldo) {
 			this.saldo = this.saldo - v;
-		
-			
+	
 			return true;
 		} else {
 			return false;
